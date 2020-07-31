@@ -12,8 +12,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	
-	
+
+
 <style>
 .zoom {
 	transition: transform .5s; /* Animation */
@@ -30,7 +30,7 @@
 	<header style="height: 30px; background-color: #21c9ff;">
 		<b style="margin-left: 50px;">Coming soon </b>
 	</header>
-	   
+
 	<div class="container">
 		<img
 			src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQu-Iy1-YbY4zzESjDdhd-eE5XFMdHaF-VDgqw-bDipibdZfiTi&usqp=CAU.png"
@@ -40,30 +40,28 @@
 				<button type="button" class="btn btn-primary">Manage Users</button>
 
 				<button type="reset" class="btn btn-danger">Email</button>
-				
+
 				<a href="Profiles">
 					<button type="button" class="btn btn-success">Profiles</button>
-				</a> 
-				
-				<a href="loggedUser">
-   				  	        <button type="button" class="btn btn-primary">Logged in User</button>
-   				  	        </a>
-				
-				<a href="LogOut">
+				</a> <a href="loggedUser">
+					<button type="button" class="btn btn-primary">Logged in
+						User</button>
+				</a> <a href="LogOut">
 					<button type="button" class="btn btn-warning">Logout</button>
-				</a>
-				<br/><br>
-				<h1>Dash Board</h1> 
+				</a> <br />
+				<br>
+				<h1>Dash Board</h1>
 			</div>
 		</div>
 
-		<br /> 
+		<br />
 
 		<table class="table table-bordered">
 
 			<tr>
 				<td>Name</td>
-				<td>${userData.name}</td> <!-- changed magic to userdata -->
+				<td>${userData.name}</td>
+				<!-- changed magic to userdata -->
 			</tr>
 
 			<tr>
@@ -90,15 +88,16 @@
 				<td>Qualification</td>
 				<td>${userData.qualification}</td>
 			</tr>
-			
+
 			<tr>
 				<td>Photo</td>
-				<td><img src="${userData.photo}" style="width:128px;height:128px;" class = "zoom"></td>
+				<td><img src="${userData.photo}"
+					style="width: 128px; height: 128px;" class="zoom"></td>
 			</tr>
 
 		</table>
 
-		
+
 	</div>
 
 

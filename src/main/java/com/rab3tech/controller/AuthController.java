@@ -1,5 +1,9 @@
 package com.rab3tech.controller;
 
+import java.io.IOException;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +47,15 @@ public class AuthController {
 			session.invalidate();
 
 		model.addAttribute("hmmmm", "You have logged out successfully!!");
-		return "login";
+		return "loginpage";
 	}
+	
+	@GetMapping({"/","/auth"}) //if the URL got / or auth it will show the login page
+		public String showLoginPage() {
+		
+		return "loginpage";
+			
+		}
 	
 	
 	//spring mvc says ->do not use HttpServletRequest
@@ -62,8 +73,25 @@ public class AuthController {
 		  return "dashboard";
 	  }else {  //user is not there
 		  model.addAttribute("hmmmm", "Sorry , username and password are not correct");
-		  return "login";
+		  return "loginpage";
 	  }
 	}
 
+@GetMapping("/load/image")
+public void findPhotoByUsername(@RequestParam String username, HttpServletResponse response) throws IOException {
+	
+	//Dont want to go the view
+	response.setContentType("image/jpg");
+	
+	byte[] photo = profileDao.findPhotoByUsername(username);
+	//outputStream - this pointing to body of the response
+			ServletOutputStream outputStream=response.getOutputStream();
+			if(photo!=null && photo.length>0) {
+				//
+				outputStream.write(photo);
+				outputStream.flush();
+			}
+			outputStream.close();
+	
+}	
 }

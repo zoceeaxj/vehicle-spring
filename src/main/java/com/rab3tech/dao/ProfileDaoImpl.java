@@ -1,6 +1,8 @@
 package com.rab3tech.dao;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.SqlLobValue;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -173,4 +178,45 @@ public class ProfileDaoImpl implements ProfileDao {
 		return pass;
 		
 	}
+
+
+	@Override
+	public String icreateSignup(ProfileDTO profileDTO) {
+		
+		byte[] image = null;
+		try {
+			image = profileDTO.getFile().getBytes();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		LobHandler lobHandler=new DefaultLobHandler();
+	    SqlLobValue sqlLobValue=new SqlLobValue(image,lobHandler);
+
+	    String sql = "insert into iuser_login_tbl(username,password,name,email,qualification,mobile,photo,gender,createdate) values(?,?,?,?,?,?,?,?,?)";
+		Object data[]={profileDTO.getUsername(),profileDTO.getPassword(),profileDTO.getName(),profileDTO.getEmail(),
+				profileDTO.getQualification(),profileDTO.getMobile(),sqlLobValue,profileDTO.getGender(),new Timestamp(new Date().getTime())};
+		int[] dataType=new int[] { Types.VARCHAR, Types.VARCHAR,
+	               Types.VARCHAR, Types.VARCHAR,  Types.VARCHAR,Types.VARCHAR,Types.BLOB,Types.VARCHAR,Types.TIMESTAMP};
+
+		//Be careful here order is important
+		jdbcTemplate.update(sql,data,dataType);
+		
+		return "success";
+	}
+	@Override
+	public List <ProfileDTO> findAllWithPhoto(){
+		String sql = "select username, password,name,email,qualification,mobile,gender,createdate from iuser_login_tbl";
+		List <ProfileDTO> profileDTOs = jdbcTemplate.query(sql,new BeanPropertyRowMapper(ProfileDTO.class));
+		return profileDTOs;
+	}
+	
+	@Override
+	public byte[] findPhotoByUsername(String pusername) {
+		String sql = "select photo from iuser_login_tbl where username = '"+pusername+"'";
+		byte[] photo = jdbcTemplate.queryForObject(sql, byte[].class);
+		return photo;
+		
+	}
+	
 }

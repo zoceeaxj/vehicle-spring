@@ -20,7 +20,7 @@
 }
 </style>
 
-<title>Sign Up</title>
+<title>Sign Up Hello</title>
 </head>
 <body>
 	<header style="background-color: #03a9f4; height: 5px;"> </header>
@@ -30,23 +30,25 @@
 
 		<div class="tcenter" style="width: 50%">
 
-			<form class="text-center border border-light p-5" action="usignup"
-				method="post">
+			<form class="text-center border border-light p-5"
+				action="${pageContext.request.contextPath}/isignup" method="post"
+				enctype="multipart/form-data">
 
 				<p class="h4 mb-4">Sign up</p>
 
 				<div class="tcenter" style="width: 50%">
 
 					<!-- name  -->
-					<input type="text" class="form-control" placeholder="Name" name = "name">
-					<br />
+					<input type="text" class="form-control" placeholder="Name"
+						name="name"> <br />
 
 					<!-- E-mail -->
-					<input type="email" class="form-control mb-4" placeholder="Email"name ="email" >
+					<input type="email" class="form-control mb-4" placeholder="Email"
+						name="email">
 
 					<!-- Degree -->
 					<select type="text" class="form-control"
-						placeholder="Qualification" name ="qualification" >
+						placeholder="Qualification" name="qualification">
 						<option>Qualification</option>
 						<option>High School</option>
 						<option>Bachelors</option>
@@ -55,17 +57,19 @@
 					</select> <br />
 
 					<!-- Mobile -->
-					<input type="number" class="form-control" placeholder="Mobile" name = "mobile">
-					<br />
+					<input type="number" class="form-control" placeholder="Mobile"
+						name="mobile"> <br />
 
 					<!-- Image -->
-					<input type="text" class="form-control" placeholder="Photo" name = "photo">
-
+					<input type="file" class="form-control" placeholder="Add Photo"
+						name="file"
+						style="background-color: #d2f9ff; height: 40px; width: 250px;">
 					<br />
-					<!-- Gender -->
 
-					<select type="text" class="form-control" placeholder="Gender" name = "gender">
-					<option>Gender</option>
+					<!-- Gender -->
+					<select type="text" class="form-control" placeholder="Gender"
+						name="gender">
+						<option>Gender</option>
 						<option>Male</option>
 						<option>Female</option>
 					</select> <br />
@@ -73,9 +77,10 @@
 					<!-- Sign up button -->
 					<button class="btn btn-info" type="submit">Register</button>
 
-					<a href="loginpage.jsp"><button type="button" class="btn btn-info">Sign
-							In</button></a> <br /> <br />
-					
+					<a href="${pageContext.request.contextPath}/auth">
+						<button type="button" class="btn btn-info">Sign In</button>
+					</a> <br /> <br />
+
 
 
 				</div>

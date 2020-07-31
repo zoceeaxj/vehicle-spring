@@ -60,7 +60,7 @@
 
 		<div class="tcenter" style="width: 50%">
 
-			${message}
+			${hmmmm}
 
 			<form class="text-center border border-light p-5" name="authform"
 				action="auth" method="post">
@@ -87,14 +87,20 @@
 						onClick="validateLogin();">Sign in</button>
 
 					<!-- Sign up button -->
-					<a href="signup.jsp"><button type="button" class="btn btn-info">Sign
-							Up</button></a> <br /> <br />
+					<a href="${pageContext.request.contextPath}/signup"><button
+							type="button" class="btn btn-info">Sign Up</button></a> <br /> <br />
 
 					<!-- Forget password button -->
-					<a href="fpassword">
+					<a href="${pageContext.request.contextPath}/fpassword">
 						<button class="btn btn-danger" type="button">Forget
 							Password</button>
-					</a>
+					</a> <br />
+					<br />
+
+					<!-- Sign up button -->
+					<a href="${pageContext.request.contextPath}/isignup"><button
+							type="button" class="btn btn-info">Sign Up Image</button></a> <br />
+					<br />
 
 				</div>
 			</form>

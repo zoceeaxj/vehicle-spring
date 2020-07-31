@@ -50,11 +50,10 @@
 
 					<a href=Profiles>
 						<button type="button" class="btn btn-success">Profiles</button>
-					</a> 
-						<a href="loggedUser">
-   				  	        <button type="button" class="btn btn-primary">Logged in User</button>
-   				  	        </a>
-					</a> <a href="LogOut">
+					</a> <a href="loggedUser">
+						<button type="button" class="btn btn-primary">Logged in
+							User</button>
+					</a> </a> <a href="LogOut">
 						<button type="button" class="btn btn-warning">Logout</button>
 					</a>
 
@@ -67,7 +66,7 @@
 							<button type="button" class="btn btn-primary">Clear</button>
 						</a>
 					</form>
-					
+
 					<form action="filterProfile">
 						<select class="form-control" placeholder="Filter"
 							name="filterText" style="width: 25%; display: inline;">
@@ -76,9 +75,10 @@
 							<c:forEach items="${listoptions}" var="toption">
 								<option>${toption}</option>
 							</c:forEach>
-						</select> 
-						<button type="submit" class="btn btn-primary" style="margin-top: -4px;">Go</button>
-						
+						</select>
+						<button type="submit" class="btn btn-primary"
+							style="margin-top: -4px;">Go</button>
+
 
 					</form>
 					<hr />
@@ -90,7 +90,7 @@
 						<thead>
 
 							<tr>
-								<th>S.NO</th> 
+								<th>S.NO</th>
 								<th>Username</th>
 								<th>Password</th>
 								<th>Name</th>
@@ -109,7 +109,7 @@
 
 							<c:forEach items="${profileDTOs}" var="profileDTO" varStatus="cc">
 								<tr class="item">
-									<td>${cc.count}</td> 
+									<td>${cc.count}</td>
 									<td>${profileDTO.username}</td>
 									<td>${profileDTO.password}</td>
 									<td>${profileDTO.name}</td>
