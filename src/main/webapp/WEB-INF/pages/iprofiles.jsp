@@ -18,6 +18,42 @@
 <script
 	src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 
+<!-- JavaScript -->
+
+<script type="text/javascript">
+	//jQuery Ready Hander
+	$(document).ready(function() {
+		$("#imgInp").change(function() {
+			readURL(this);
+		});
+	});
+
+	//Code which is used to preview the image 
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#ppimage').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]); // convert to base64 string
+		}
+	}
+
+	function openModal(username, email) {
+		var imgURL = "${pageContext.request.contextPath}/load/image?username="
+				+ username;
+		$("#pimage").attr("src", imgURL);
+		$("#pemail").html(email);
+
+		//This I need to edit the image when data is sent to the server from the client 
+		$("#username").val(username);
+		//Open modal as per it;s ID
+		$("#changeImageModel").modal("show");
+
+	}
+</script>
+
+
 <style>
 .zoom {
 	transition: transform .5s; /* Animation */
@@ -49,7 +85,11 @@
 					<button type="reset" class="btn btn-danger">Email</button>
 
 					<a href=Profiles>
-						<button type="button" class="btn btn-success">Profiles</button>
+						<button type="button" class="btn btn-success">Profiles</button> <a
+						href=iprofiles>
+							<button type="button" class="btn btn-success">IProfiles</button>
+					</a>
+
 					</a> <a href="loggedUser">
 						<button type="button" class="btn btn-primary">Logged in
 							User</button>
@@ -102,7 +142,7 @@
 								<th>Qualification</th>
 								<th>Mobile</th>
 								<th>Photo</th>
-								<th>Action</th>
+							<!-- 	<th>Action</th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -118,16 +158,59 @@
 									<td>${profileDTO.mobile}</td>
 									<td><img
 										src="${pageContext.request.contextPath}/load/image?username=${profileDTO.username}"
-										style="width: 120px; height: 128px;" class="zoom" /></td>
-
-									<td><a
-										href="deleteProfile?username=${profileDTO.username}"> <img
-											src="img/Delete.png" style="height: 30px;" /> <a
-											href="editProfile?username=${profileDTO.username}"> <img
-												src="img/Edit.png" style="height: 30px;" />
-
-										</a>
+										style="width: 120px; height: 128px;" class="zoom" /> 
+										<a
+										href="javascript:openModal('${profileDTO.username}','${profileDTO.email}');">
+											<img src="${pageContext.request.contextPath}/img/edit1.png"width="30" height="30">
 									</a></td>
+									
+								<%-- 	<a href="deleteProfile?username=${profileDTO.username}">
+															<img src="img/Delete.png" style="height: 30px;" /> <a
+															href="editProfile?username=${profileDTO.username}"> <img
+																src="img/Edit.png" style="height: 30px;" />
+
+														</a>
+														</a> --%>
+
+									<td>
+										<!-- The Modal Code -->
+										<div class="modal" id="changeImageModel">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<form
+														action="${pageContext.request.contextPath}/changeImage"
+														method="post" enctype="multipart/form-data">
+														<input type="hidden" name="username" id="username" />
+														
+
+														<!-- Modal Header -->
+														<div class="modal-header">
+															<h4 class="modal-title">Edit Profile Image</h4>
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+														</div>
+
+														<!-- Modal body -->
+														<div class="modal-body">
+															<label>Email : <span id="pemail"
+																style="font-size: 18px; font-weight: bold;"></span></label>
+															<hr />
+															<img src="" id="pimage" style="height: 100px;"> <img
+																src="" id="ppimage" style="height: 100px;"> 
+																<br/><br/>
+																<input
+																type="file" name="file" id="imgInp" class="form-control" />
+														</div>
+
+														<!-- Modal footer -->
+														<div class="modal-footer">
+															<button type="submit" class="btn btn-primary">Change
+																Photo</button>
+															<button type="button" class="btn btn-danger"
+																data-dismiss="modal">Close</button>
+														</div>
+</form></div></div></div>
+														
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -136,18 +219,11 @@
 
 				</div>
 
-
-
-
 			</div>
 			<br /> <br />
 
 		</div>
 	</div>
-
-
-
-
 
 </body>
 </html>

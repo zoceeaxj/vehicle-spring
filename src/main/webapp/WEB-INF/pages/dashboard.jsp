@@ -43,6 +43,10 @@
 
 				<a href="Profiles">
 					<button type="button" class="btn btn-success">Profiles</button>
+					
+					</a>
+   				  	         <a href="iprofiles">
+   				  	        <button type="button" class="btn btn-success">IProfiles</button>
 				</a> <a href="loggedUser">
 					<button type="button" class="btn btn-primary">Logged in
 						User</button>

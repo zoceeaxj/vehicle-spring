@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.rab3tech.dao.ProfileDTO;
 import com.rab3tech.dao.ProfileDao;
@@ -23,6 +24,14 @@ public class CustomerController {
 
 	@Autowired
 	private ProfileDao profileDao;
+	
+	@PostMapping("/changeImage")
+	public String updateImage(@RequestParam("file") MultipartFile file,@RequestParam("username") String username) {
+		//Here write logic 
+		//1. update photo into database
+		//2. send email to the user
+		return "redirect:/iprofiles";
+	}
 
 	@GetMapping("/Profiles")
 	public String showProfiles(Model model) {
