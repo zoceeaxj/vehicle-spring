@@ -38,4 +38,6 @@ public interface ProfileDao {
 
 	byte[] findPhotoByUsername(String pusername);
 
+	String updatePhoto(ProfileDTO profileDTO);
+
 }

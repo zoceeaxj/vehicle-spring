@@ -219,4 +219,25 @@ public class ProfileDaoImpl implements ProfileDao {
 		
 	}
 	
+	@Override
+	public String updatePhoto(ProfileDTO profileDTO) {
+		byte[] image=null;
+		try {
+			image=profileDTO.getFile().getBytes();
+			if(image!=null && image.length<5){
+				return "fail";
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    LobHandler lobHandler=new DefaultLobHandler();
+	    SqlLobValue sqlLobValue=new SqlLobValue(image,lobHandler);
+		String sql = "update  iuser_login_tbl set photo=? where username=?";
+		Object data[]={sqlLobValue,profileDTO.getUsername(),};
+		int[] dataType=new int[] {Types.BLOB,Types.VARCHAR};
+		//Be careful here order is important
+		jdbcTemplate.update(sql,data,dataType);
+		return "success";
+	}
+	
 }

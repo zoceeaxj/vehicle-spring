@@ -3,10 +3,11 @@ package com.rab3tech.controller;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,22 @@ public class CustomerController {
 	@Autowired
 	private ProfileDao profileDao;
 	
+	@Autowired
+	private MailSender mailSender;
+	
 	@PostMapping("/changeImage")
 	public String updateImage(@RequestParam("file") MultipartFile file,@RequestParam("username") String username) {
+		ProfileDTO profileDTO=new ProfileDTO();
+		profileDTO.setFile(file);
+		profileDTO.setUsername(username);
+		profileDao.updatePhoto(profileDTO);
+
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(username);
+		email.setSubject("Regarding profile image update");
+		email.setText("Hello your profile image is updatee");
+		mailSender.send(email);
+		
 		//Here write logic 
 		//1. update photo into database
 		//2. send email to the user

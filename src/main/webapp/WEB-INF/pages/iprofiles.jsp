@@ -42,10 +42,15 @@
 	function openModal(username, email) {
 		var imgURL = "${pageContext.request.contextPath}/load/image?username="
 				+ username;
+		
+		//This line is showing image on the fly on modal
 		$("#pimage").attr("src", imgURL);
+		
+		//Setting email id of the user on modal as label
 		$("#pemail").html(email);
 
 		//This I need to edit the image when data is sent to the server from the client 
+		//Setting email id as a hidden field inside modal form
 		$("#username").val(username);
 		//Open modal as per it;s ID
 		$("#changeImageModel").modal("show");
