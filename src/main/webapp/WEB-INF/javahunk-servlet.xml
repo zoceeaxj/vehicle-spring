@@ -18,6 +18,8 @@
 	<!-- This is the package name in which controller resides -->
 	<context:component-scan
 		base-package="com.rab3tech.controller" />
+		
+	<context:component-scan base-package="com.rab3tech.service" />
 
 	<!-- Hey I am going to JSP -->
 	<bean id="viewResolver"

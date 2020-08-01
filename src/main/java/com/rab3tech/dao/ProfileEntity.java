@@ -1,4 +1,5 @@
 package com.rab3tech.dao;
+
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,9 +10,10 @@ import javax.servlet.http.HttpSessionBindingListener;
 
 import org.springframework.web.multipart.MultipartFile;
 
+//this is a Plain Old Java Object (POJO) class used in DAO
 
-@WebListener 
-public class ProfileDTO implements HttpSessionBindingListener{
+@WebListener
+public class ProfileEntity {
 	private String username;
 	private String password;
 	private String name;
@@ -20,84 +22,23 @@ public class ProfileDTO implements HttpSessionBindingListener{
 	private String gender;
 	private String photo;
 	private String qualification;
-	
-	
-	//This is used to hold image
-		private MultipartFile file;
 
-
+	// This is used to hold image
+	private MultipartFile file;
 
 	public MultipartFile getFile() {
-			return file;
-		}
-
-
-		public void setFile(MultipartFile file) {
-			this.file = file;
-		}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		return file;
 	}
 
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProfileDTO other = (ProfileDTO) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
-	private static Set<ProfileDTO> loggedInUsers=new HashSet<ProfileDTO>();
-	
-	
-	public static Set<ProfileDTO> loggedInUser(){
-		return loggedInUsers;
-	}
-	
-	
-	// session.setAttribute("userData", profileDTO);
-	@Override
-	public void valueBound(HttpSessionBindingEvent event) {
-		ProfileDTO profileDTO=(ProfileDTO)event.getValue();
-		loggedInUsers.add(profileDTO);
+	public ProfileEntity() {
+
 	}
 
-	
-	//session.removeAttribute("userData");
-	//when session is invalidated
-	@Override
-	public void valueUnbound(HttpSessionBindingEvent event) {
-		ProfileDTO profileDTO=(ProfileDTO)event.getValue();
-		loggedInUsers.remove(profileDTO);// TODO Auto-generated method stub
-	}
-
-	public ProfileDTO() {
-		
-	}
-	
-	public ProfileDTO(String username, String password, String name, String email, String mobile, String gender,
+	public ProfileEntity(String username, String password, String name, String email, String mobile, String gender,
 			String photo, String qualification) {
 		super();
 		this.username = username;

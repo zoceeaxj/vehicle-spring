@@ -2,6 +2,7 @@ package com.rab3tech.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,19 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.rab3tech.dao.ProfileDTO;
-import com.rab3tech.dao.ProfileDao;
+import com.rab3tech.controller.dto.ProfileDTO;
+import com.rab3tech.service.ProfileService;
 
 @Controller //@Repository , @Service ,@Component
 public class AuthController {
 	
 	@Autowired
-	private ProfileDao profileDao;
+	private ProfileService profileService;
 	
 	
 	@PostMapping("/fpassword")
 	public String forgotPasswordPost(@RequestParam("usernameEmail") String usernameEmail,Model model) {
-		String password=profileDao.findPasswordByUsernameOrEmail(usernameEmail);
+		String password=profileService.findPasswordByUsernameOrEmail(usernameEmail);
 		if(password.length()==0){
 			model.addAttribute("message", "I am sorry , your username and email are not correct!");
 		}else{
@@ -63,7 +64,7 @@ public class AuthController {
 	@PostMapping("/auth")
 	public String validateUser(@RequestParam("username") String username,@RequestParam("password") String password,
 			HttpSession session,Model model) {
-		ProfileDTO profileDTO=profileDao.authUser(username, password);
+		ProfileDTO profileDTO=profileService.authUser(username, password);
 		if(profileDTO!=null) {
 		   //page->request-session-application	
 		   //HttpSession session=req.getSession(true); 	
@@ -83,7 +84,7 @@ public void findPhotoByUsername(@RequestParam String username, HttpServletRespon
 	//Dont want to go the view
 	response.setContentType("image/jpg");
 	
-	byte[] photo = profileDao.findPhotoByUsername(username);
+	byte[] photo = profileService.findPhotoByUsername(username);
 	//outputStream - this pointing to body of the response
 			ServletOutputStream outputStream=response.getOutputStream();
 			if(photo!=null && photo.length>0) {

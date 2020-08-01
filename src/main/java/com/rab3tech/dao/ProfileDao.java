@@ -2,42 +2,40 @@ package com.rab3tech.dao;
 
 import java.util.List;
 
-
-
 public interface ProfileDao {
 
 	void show();
 
-	String updateSignup(ProfileDTO profileDTO);
+	String updateSignup(ProfileEntity profileEntity);
 
-	String createSignup(ProfileDTO profileDTO);
+	String createSignup(ProfileEntity profileEntity);
 
-	List<ProfileDTO> sortProfiles(String sort);
+	List<ProfileEntity> sortProfiles(String sort);
 
 	List<String> findAllQualification();
 
-	List<ProfileDTO> filterProfiles(String filterText);
+	List<ProfileEntity> filterProfiles(String filterText);
 
-	List<ProfileDTO> searchProfiles(String search);
+	List<ProfileEntity> searchProfiles(String search);
 
-	List<ProfileDTO> findAll();
+	List<ProfileEntity> findAll();
 
-	ProfileDTO authUser(String pusername, String ppassword);
+	ProfileEntity authUser(String pusername, String ppassword);
 
-	ProfileDTO findByEmail(String pemail);
+	ProfileEntity findByEmail(String pemail);
 
-	ProfileDTO findByUsername(String pusername);
+	ProfileEntity findByUsername(String pusername);
 
 	void deleteByUsername(String pusername);
 
 	String findPasswordByUsernameOrEmail(String usernameEmail);
 
-	String icreateSignup(ProfileDTO profileDTO);
+	String icreateSignup(ProfileEntity profileEntity);
 
-	List<ProfileDTO> findAllWithPhoto();
+	List<ProfileEntity> findAllWithPhoto();
 
 	byte[] findPhotoByUsername(String pusername);
 
-	String updatePhoto(ProfileDTO profileDTO);
+	String updatePhoto(ProfileEntity profileEntity);
 
 }
