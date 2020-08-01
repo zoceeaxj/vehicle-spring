@@ -21,21 +21,21 @@
 		
 		
 		<!-- Hey Spring container create a bean of JdbcTemplate --> 
-		<bean id="gjdbcTemplate"
-		class="org.springframework.jdbc.core.JdbcTemplate"> <!-- build in class -->
+		<!-- <bean id="gjdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate"> build in class
 
-		<property name="dataSource" ref="pdataSource" /> <!-- name mug it, ref is pointing to another bean -->
+		<property name="dataSource" ref="pdataSource" /> name mug it, ref is pointing to another bean
 
-	</bean>
+	</bean> -->
 
 	<!-- Initialization for data source -->
-	<bean id="pdataSource"
+	<!-- <bean id="pdataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
-	</bean>
+	</bean> -->
 	
 	<!-- Production implementation of the JavaMailSender interface, supporting 
 		both JavaMail MimeMessages and Spring SimpleMailMessages -->
